@@ -5,8 +5,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="types">
+      <UniqueIdentifier>{40fe7fe1-ca05-4846-a29e-d0adaccc3910}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="types\node.cpp">
+      <Filter>types</Filter>
+    </ClCompile>
+    <ClCompile Include="types\ptr_guard.cpp">
+      <Filter>types</Filter>
+    </ClCompile>
+    <ClCompile Include="types\list.cpp">
+      <Filter>types</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="types\node.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="types\ptr_guard.h">
+      <Filter>types</Filter>
+    </ClInclude>
+    <ClInclude Include="types\list.h">
+      <Filter>types</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
