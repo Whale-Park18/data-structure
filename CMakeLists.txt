@@ -24,5 +24,5 @@ FetchContent_MakeAvailable(googletest) # googletest 빌드 실행
 enable_testing()
 
 # 하위 디렉토리 추가
-add_subdirectory(test-project)
+add_subdirectory(dsl)
 add_subdirectory(tests)
