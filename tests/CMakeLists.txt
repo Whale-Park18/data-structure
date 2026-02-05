@@ -1,6 +1,8 @@
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(tests dummy_test.cpp)
+add_executable(tests
+    array_test.cpp
+)
 
 # Google Test 라이브러리 링크
 target_link_libraries(
@@ -8,6 +10,7 @@ target_link_libraries(
     PRIVATE
         gtest_main # google test의 메인 함수 자동 추가
         gtest      # google test 라이브러리 링크
+        gmock      # google mock 라이브러리 링크
         dsl        # dsl 라이브러리 링크
 )
 
