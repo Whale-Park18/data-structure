@@ -1,0 +1,60 @@
+name: C++ Tests
+
+# 작업 트리거 설정
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build type'
+        required: false
+        default: 'Release'
+        type: choice
+        options:
+          - Debug
+          - Release
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake ninja-build pkg-config
+
+    - name: Create build directory
+      run: mkdir -p build
+
+    - name: Configure (CMake)
+      working-directory: build
+      run: >
+        cmake -S .. -B . 
+        -DCMAKE_BUILD_TYPE=${{ github.event.inputs.build_type || 'Release' }} 
+        -G Ninja
+
+    - name: Build
+      working-directory: build
+      run: >
+        cmake --build . 
+        --config ${{ github.event.inputs.build_type || 'Release' }} 
+        -- -j$(nproc)
+
+    - name: Run tests (CTest)
+      working-directory: build
+      run: ctest --output-on-failure --verbose
+
+    - name: Publish Test Results
+      if: always()
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      with:
+        files: 'build/Testing/**/*.xml'
+        check_name: GTest Results
+        comment_title: Test Report
